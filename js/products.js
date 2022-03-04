@@ -26,17 +26,8 @@ async function displayProducts() {
     let menLongSleeve = [];
     let womenShortSleeve = [];
     let womenLongSleeve = [];
-    // let menSizeOptionHtmlShort = '';
-    // let menColorOptionHtmlShort = '';
-    // let menSizeOptionHtmlLong = '';
-    // let menColorOptionHtmlLong = '';
-    // let womenSizeOptionHtmlShort = '';
-    // let womenColorOptionHtmlShort = '';
-    // let womenSizeOptionHtmlLong = '';
-    // let womenColorOptionHtmlLong = '';
     const menHeading = `<h2>Men's Shirts</h2>`;
     const womenHeading = `<h2>Women's Shirts</h2>`;
-
 
     //DOM elements
     const shortContainer = document.querySelector('.short-sleeve-container');
@@ -54,7 +45,7 @@ async function displayProducts() {
 
         const menShortSleeveHTML = menShortSleeve.map(item => {
                     return `
-            <form class="card">
+            <div class="card">
               <h2 class="card-type">${item.type.charAt(0).toUpperCase() + item.type.slice(1)}'s</h2>
               <h3 class="card-style">${item.style.charAt(0).toUpperCase() + item.style.slice(1)}</h3>
               <label class="card-label" for="size">Size:</label>
@@ -66,7 +57,7 @@ async function displayProducts() {
               ${item.colors.map(color => `<option class="color" value="${color}">${color}<option>`).join('')}
               </select>
               <input type="submit" class="btn" id="addToCart" value="Add To Cart">
-            </form>
+            </div>
             `
         }).join('')
 
@@ -91,12 +82,20 @@ async function displayProducts() {
         shortContainer.innerHTML = `<div class="container">${menShortSleeveHTML}</div>
                                     <div class="container">${womenShortSleeveHTML}</div>`;
 
+        //event listener for add to cart button
         const cartButtons = document.querySelectorAll('.btn');
-
         cartButtons.forEach(button => {
-         
           button.addEventListener('click', (e) => {
             e.preventDefault();
+            let parentDiv = e.target.parentElement;
+            //type
+            console.log(parentDiv.children[0].innerText)
+            //style
+            console.log(parentDiv.children[1].innerText)
+            //size
+            console.log(parentDiv.children[3].value)
+            //color
+            console.log(parentDiv.children[5].value)
           })
         })
        
