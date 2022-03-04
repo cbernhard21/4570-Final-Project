@@ -1,0 +1,86 @@
+<!doctype html>
+<!--
+   File: profile.html
+   Author: ICT-4305 as-provided
+-->
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ACME Shirts Profile Settings</title>
+  <link href="css/acme_styles.css" rel="stylesheet" />
+</head>
+
+<body>
+  <header>
+    <!-- ACME logo image -->
+    <img src="images/Acme_logo.png" alt="ACME Logo Image" />
+  </header>
+
+  <nav>
+    <!-- navigation links -->
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="register.html">Register</a></li>
+      <li><a href="login.html">Login</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- content area of web page -->
+    <h1>Change Your ACME Shirts Profile</h1>
+    <h2>ACME Shirts We Know Style</h2>
+    <!-- <p class="instruction">You may give users the choice of as many background and submit button colors as you want, but the user should not be able to change the text color in the forms or the submit buttons. Remember that some background colors will make the text hard to
+      read so you should avoid those colors for the choices for the user to pick for their personalized background color. Remove this red text before submitting your files for grading.</p> -->
+
+    <p class="welcome-message"></p>
+
+    <p>Change your profile colors for your background and your submit buttons. The settings you choose here will be used for all forms in the ACME Shirts website until you change them again. You can set up a new screen name, too.
+    </p>
+
+    <div id="formBox" class="regularBox">
+      <!-- registration form -->
+      <form id="profileForm" method="" action="">
+        <p>
+          <label for="screenName">NEW Screen Name:</label>
+          <input id="screenName" name="screenName" type="text" />
+        </p>
+        <p>
+          <!-- drop down list of color options -->
+          <label for="backgroundColor">NEW Background Color:</label>
+          <select id="backgroundColor">
+                    <option value="green">Default Green</option>
+	                 <option value="black">Black</option>
+                    <option value="blue">Blue</option>
+                    <option value="brown">Brown</option>
+                </select>
+        </p>
+        <p>
+          <!-- drop down list of color options -->
+          <label for="buttonColors">NEW Button Color:</label>
+          <select id="buttonColors">
+                    <option value="white">Default Antique White</option>
+	                 <option value="grey">Grey</option>
+                    <option value="babyBlue">Baby Blue</option>
+                    <option value="lightBrown">Light Brown</option>
+                </select>
+        </p>
+        <p>
+          <input type="button" value="Submit" class="submit">
+        </p>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <!-- footer content -->
+    <p>University of Denver University College</p>
+    <p>2021</p>
+  </footer>
+  <script src="js/profile.js" type="module"></script>
+
+</body>
+
+</html>

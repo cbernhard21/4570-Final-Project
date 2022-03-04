@@ -1,0 +1,66 @@
+<!doctype html>
+<!--
+   File: login.html
+   Author: ICT-4305 as-provided
+-->
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ACME Shirts Login</title>
+  <link href="css/acme_styles.css" rel="stylesheet" />
+
+</head>
+
+<body>
+  <header>
+    <!-- ACME logo image -->
+    <img src="images/Acme_logo.png" alt="ACME Logo Image" />
+  </header>
+
+  <nav>
+    <!-- navigation links -->
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="register.html">Register</a></li>
+      <li><a href="login.html">Login</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- page content area -->
+    <h1>Login to Your ACME Account</h1>
+    <h2>We Know Style</h2>
+    <!-- web page headings -->
+
+    <div id="formBox" class="regularBox">
+      <form id="loginForm" method="" action="">
+        <!-- login form -->
+        <p>
+          <label for="username">Username:</label>
+          <!-- customer username -->
+          <input id="username" name="username" type="text" />
+        </p>
+        <p>
+          <label for="password">Password:</label>
+          <!-- customer password -->
+          <input id="password" name="password" type="text" />
+        </p>
+        <p>
+          <input type="button" value="Submit" class="submit" />
+        </p>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <!-- footer content -->
+    <p>University of Denver University College</p>
+    <p>2021</p>
+  </footer>
+  <script src="./js/login.js" type="module"></script>
+</body>
+
+</html>

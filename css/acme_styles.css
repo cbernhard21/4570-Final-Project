@@ -1,0 +1,195 @@
+/*
+ * File: drop-down-menu.css
+ * Author: As-provided
+*/
+
+body {
+  /* background style rules for web page body */
+  width: 1024px;
+  font-family: Helvetica, Arial, "sans-serif";
+  font-size: 90%;
+  margin: 0 auto;
+  background-color: #91663B;
+}
+
+main {
+  /* page content style rules */
+  float: left;
+  margin: 0 auto;
+  padding-bottom: 10px;
+  width: 100%;
+  background-color: #F4EDDF;
+}
+
+header {
+  /* page header style rules */
+  padding-left: 5px;
+  background-color: #5B4025;
+}
+
+h1 {
+  /* page heading 1 style rules */
+  color: #6d4d2c;
+  font-family: 'Times New Roman', Times;
+  margin: 10px auto;
+  text-align: center;
+  font-weight: bold;
+  font-size: 3em;
+  padding: 15px 0 0 0;
+}
+
+h2 {
+  /* page heading 2 style rules */
+  text-align: center;
+  color: #6d4d2c;
+  font-family: 'Times New Roman', Times;
+  margin: 0 auto;
+  text-align: center;
+  font-weight: bold;
+}
+
+p {
+  /* page paragraph style rules */
+  padding-left: 35px;
+  padding-right: 35px;
+  line-height: 1.5;
+  font-size: 110%;
+}
+
+ul {
+  /* page navigation unordered list style rules */
+  list-style-type: none;
+  margin: -2px 0 0 0;
+  padding: 0 0 0 110px;
+  overflow: hidden;
+  background-color: #557C3E;
+}
+
+li {
+  /* page list element style rule */
+  float: left;
+}
+
+li a {
+  /* navigation list element style rules */
+  display: inline-block;
+  color: #e7f6d5;
+  text-align: center;
+  padding: 8px 30px;
+  text-decoration: none;
+  border-right: thin solid rgba(80, 180, 60, 1.00);
+  border-radius: 5px;
+}
+
+li a:hover {
+  /* navigation hover style rules */
+  background-color: #CFE8CC;
+  color: #557C3E;
+}
+
+footer {
+  /* page footer style rules */
+  clear: both;
+  float: left;
+  padding: 0px;
+  margin: 0px;
+  background-color: #5B4025;
+  width: 1024px;
+  max-height: 3%;
+  overflow: auto;
+  position: relative;
+  bottom: 0;
+}
+
+footer p {
+  /* footer paragraph style rules */
+  color: #CFEEAB;
+  padding-top: 0px;
+  text-align: center;
+  font-size: 90%;
+}
+
+#formBox {
+  /* web page forms style rules */
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  margin-bottom: 40px;
+  width: 550px;
+  padding: 10px;
+  background-color: #557C3E;
+  border-radius: 10px;
+  box-shadow: 4px 4px 16px 0 #1d1713;
+}
+
+label {
+  /* web page form labels style rules */
+  display: block;
+  float: left;
+  width: 200px;
+  color: #FFFFFF;
+  text-align: right;
+  padding-right: 10px;
+  font-size: 110%;
+  font-weight: 300;
+  margin-top: 10px;
+}
+
+input,
+select {
+  /* input and select form style rules */
+  width: 260px;
+  font-family: Arial;
+  color: #333333;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.submit {
+  /* submit button style rules */
+  margin-left: 200px;
+  width: 80px;
+  background-color: #FAEBD7;
+  border: thin;
+  padding: 5px 10px;
+}
+
+
+/* For instructions embedded in a page */
+
+.instruction {
+  color: red;
+  font-weight: bold;
+}
+
+
+/* Logout form box has a different min-height */
+
+.regularBox {
+  min-height: 275px;
+}
+
+.smallBox {
+  min-height: 100px;
+}
+
+
+/* styles for error message */
+
+.error {
+  color: #F4EDDF;
+  background-color: rgb(167, 2, 2);
+  padding: 1rem .5rem;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.welcome-message {
+  color: #6d4d2c;
+  font-size: 3rem;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  margin-top: 2rem;
+  box-sizing: border-box;
+}

@@ -1,0 +1,29 @@
+{
+  "Men": [{
+      "sleeve": "short",
+      "size": ["small", "medium", "large", "x-large"],
+      "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
+      "style": "t-shirt"
+    },
+
+    {
+      "sleeve": "long",
+      "size": ["small", "medium", "large", "x-large"],
+      "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
+      "style": "dress shirt"
+    }
+  ],
+  "Women": [{
+      "sleeve": "short",
+      "size": ["small", "medium", "large", "x-large"],
+      "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
+      "style": "t-shirt"
+    },
+    {
+      "sleeve": "long",
+      "size": ["small", "medium", "large", "x-large"],
+      "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
+      "style": "dress shirt"
+    }
+  ]
+}
