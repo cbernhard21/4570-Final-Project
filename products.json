@@ -1,29 +1,54 @@
 {
-  "Men": [{
-      "sleeve": "short",
-      "size": ["small", "medium", "large", "x-large"],
-      "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
-      "style": "t-shirt"
-    },
+    "Men": [{
+            "sleeve": "short",
+            "size": ["small", "medium", "large", "x-large"],
+            "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
+            "type": "men",
+            "style": "t-shirt"
+        },
+        {
+            "sleeve": "short",
+            "size": ["small", "medium", "large", "x-large"],
+            "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
+            "type": "men",
+            "style": "polo"
+        },
 
-    {
-      "sleeve": "long",
-      "size": ["small", "medium", "large", "x-large"],
-      "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
-      "style": "dress shirt"
-    }
-  ],
-  "Women": [{
-      "sleeve": "short",
-      "size": ["small", "medium", "large", "x-large"],
-      "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
-      "style": "t-shirt"
-    },
-    {
-      "sleeve": "long",
-      "size": ["small", "medium", "large", "x-large"],
-      "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
-      "style": "dress shirt"
-    }
-  ]
+        {
+            "sleeve": "long",
+            "size": ["small", "medium", "large", "x-large"],
+            "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
+            "type": "men",
+            "style": "dress shirt"
+        },
+        {
+            "sleeve": "long",
+            "size": ["small", "medium", "large", "x-large"],
+            "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
+            "type": "men",
+            "style": "sweatshirt"
+        }
+    ],
+    "Women": [{
+            "sleeve": "short",
+            "size": ["small", "medium", "large", "x-large"],
+            "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
+            "type": "women",
+            "style": "t-shirt"
+        },
+        {
+            "sleeve": "short",
+            "size": ["small", "medium", "large", "x-large"],
+            "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
+            "type": "women",
+            "style": "tank top"
+        },
+        {
+            "sleeve": "long",
+            "size": ["small", "medium", "large", "x-large"],
+            "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
+            "type": "women",
+            "style": "dress shirt"
+        }
+    ]
 }
