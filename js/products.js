@@ -56,12 +56,9 @@ async function displayProducts() {
   //is the user logged in
   const isLoggedIn = sessionStorage.getItem('isLoggedIn');
 
-  //get cart from local storage
-  let loggedInUserInfo = JSON.parse(localStorage.getItem('user'));
-  loggedInUserInfo.cart = [];
-  localStorage.setItem('user', JSON.stringify(loggedInUserInfo))
-  const userCart = [];
-  
+  //cart for products
+  let userCart = [];
+
   //DOM elements
   const shortContainer = document.querySelector('.short-sleeve-container');
   const longContainer = document.querySelector('.long-sleeve-container');
@@ -90,14 +87,10 @@ async function displayProducts() {
 
     //event listener for add to cart button
     const cartButtons = document.querySelectorAll('.btn');
-    let quantity = 1;
     cartButtons.forEach(button => {
       button.addEventListener('click', (e) => {
         e.preventDefault();
-
-        loggedInUserInfo = JSON.parse(localStorage.getItem('user'));
-        console.log('user info' + loggedInUserInfo);
-        
+        console.log(userCart)
         let parentDiv = e.target.parentElement;
         let selectedType = parentDiv.children[0].innerText;
         let selectedStyle = parentDiv.children[1].innerText;
@@ -109,47 +102,42 @@ async function displayProducts() {
           return
         }
 
-        let currentCart = loggedInUserInfo.cart;
-
-        if (currentCart.length > 0){
-          // console.log('your cart is full')          
-          currentCart.forEach(item => {
-
-            if(item.type === selectedType && item.style === selectedStyle && item.size === selectedSize && item.color === selectedColor && item.quantity === 1){
-              console.log('you already have this item');
-              
-              console.log(item.type, selectedType, item.style, selectedStyle, item.size, selectedSize, item.color, selectedColor, item.quantity);
+        if (userCart.length > 0) {
+          for(let i = 0; i < userCart.length; i++){
+            if(userCart[i].type === selectedType && userCart[i].style === selectedStyle && userCart[i].size === selectedSize && userCart[i].color === selectedColor){
+              console.log('this item is already in your cart.  you can change the quantity on the cart page');
               return
-            } else {
-              console.log('else from inside the loop')
-              userCart.push({
-                type: parentDiv.children[0].innerText,
-                style: parentDiv.children[1].innerText,
-                size: parentDiv.children[3].value,
-                color: parentDiv.children[5].value,
-                quantity: 1
-              });
-            }
-          });
-        
+            } 
+            console.log('add new item to cart')
+            userCart.push({
+              type: selectedType,
+              style: selectedStyle,
+              size: selectedSize,
+              color: selectedColor,
+              quantity: 1
+            });
+            console.log('from inside the loop', userCart)
+            return
+            
+            
+          }
         } else {
+          console.log('first item in your cart')
           userCart.push({
-            type: parentDiv.children[0].innerText,
-            style: parentDiv.children[1].innerText,
-            size: parentDiv.children[3].value,
-            color: parentDiv.children[5].value,
+            type: selectedType,
+            style: selectedStyle,
+            size: selectedSize,
+            color: selectedColor,
             quantity: 1
           });
-        };
-
-        //set user's cart to the user object
-        loggedInUserInfo.cart = userCart;
-
-        //set the user object back to local storage
-        localStorage.setItem('user', JSON.stringify(loggedInUserInfo))
-
+        }    
+        
+        console.log('end of event listener', userCart);
       });
+      
     });
+
+    
     
   } catch (e) {
       console.log('There was an error');
