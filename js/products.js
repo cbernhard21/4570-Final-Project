@@ -26,8 +26,13 @@ async function displayProducts() {
     let menLongSleeve = [];
     let womenShortSleeve = [];
     let womenLongSleeve = [];
-    const menHeading = `<h2>Men's Shirts</h2>`;
-    const womenHeading = `<h2>Women's Shirts</h2>`;
+
+    //is the user logged in
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+
+    //get cart from local storage
+    const loggedInUserInfo = JSON.parse(localStorage.getItem('user'));
+    const userCart = [];
 
     //DOM elements
     const shortContainer = document.querySelector('.short-sleeve-container');
@@ -87,15 +92,35 @@ async function displayProducts() {
         cartButtons.forEach(button => {
           button.addEventListener('click', (e) => {
             e.preventDefault();
+            
+            if (!isLoggedIn) {
+              alert('Please Log In To Add To Your Cart');
+              return
+            }
+
             let parentDiv = e.target.parentElement;
             //type
-            console.log(parentDiv.children[0].innerText)
-            //style
-            console.log(parentDiv.children[1].innerText)
-            //size
-            console.log(parentDiv.children[3].value)
-            //color
-            console.log(parentDiv.children[5].value)
+            // console.log(parentDiv.children[0].innerText)
+            // //style
+            // console.log(parentDiv.children[1].innerText)
+            // //size
+            // console.log(parentDiv.children[3].value)
+            // //color
+            // console.log(parentDiv.children[5].value)
+
+            userCart.push({
+                type: parentDiv.children[0].innerText,
+                style: parentDiv.children[1].innerText,
+                size: parentDiv.children[3].value,
+                color: parentDiv.children[5].value
+              })       
+
+              //set user's cart to the user object
+              loggedInUserInfo.cart = userCart;
+
+            //set the user object back to local storage
+            localStorage.setItem('user', JSON.stringify(loggedInUserInfo))
+
           })
         })
        

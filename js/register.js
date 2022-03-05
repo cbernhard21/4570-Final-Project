@@ -27,8 +27,7 @@ function register() {
                 const user = {
                     screenName: screenName,
                     username: username,
-                    password: password,
-                    cart: []
+                    password: password
                 }
                 localStorage.setItem('user', JSON.stringify(user));
                 sessionStorage.setItem('isLoggedIn', true);
