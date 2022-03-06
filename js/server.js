@@ -90,6 +90,11 @@ const server = http.createServer((req, res) => {
       res.writeHead(200, { 'Content-Type': 'text/javascript' });
       fs.createReadStream(__dirname + '/products.js').pipe(res);
       break;
+
+    case '/js/cart.js':
+      res.writeHead(200, { 'Content-Type': 'text/javascript' });
+      fs.createReadStream(__dirname + '/cart.js').pipe(res);
+      break;
       //end JS files
 
       //JSON file
