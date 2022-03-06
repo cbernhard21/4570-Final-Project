@@ -4,14 +4,16 @@
       "size": ["small", "medium", "large", "x-large"],
       "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
       "type": "men",
-      "style": "t-shirt"
+      "style": "t-shirt",
+      "price": 14.95
     },
     {
       "sleeve": "short",
       "size": ["small", "medium", "large", "x-large"],
       "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
       "type": "men",
-      "style": "polo"
+      "style": "polo",
+      "price": 19.95
     },
 
     {
@@ -19,14 +21,16 @@
       "size": ["small", "medium", "large", "x-large"],
       "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
       "type": "men",
-      "style": "dress shirt"
+      "style": "dress shirt",
+      "price": 24.95
     },
     {
       "sleeve": "long",
       "size": ["small", "medium", "large", "x-large"],
       "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
       "type": "men",
-      "style": "sweatshirt"
+      "style": "sweatshirt",
+      "price": 34.95
     }
   ],
   "Women": [{
@@ -34,28 +38,32 @@
       "size": ["small", "medium", "large", "x-large"],
       "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
       "type": "women",
-      "style": "t-shirt"
+      "style": "t-shirt",
+      "price": 14.95
     },
     {
       "sleeve": "short",
       "size": ["small", "medium", "large", "x-large"],
       "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
       "type": "women",
-      "style": "tank top"
+      "style": "tank top",
+      "price": 9.95
     },
     {
       "sleeve": "long",
       "size": ["small", "medium", "large", "x-large"],
       "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
       "type": "women",
-      "style": "dress shirt"
+      "style": "dress shirt",
+      "price": 24.95
     },
     {
       "sleeve": "long",
       "size": ["small", "medium", "large", "x-large"],
       "colors": ["white", "black", "red", "yellow", "orange", "blue", "green", "gray"],
       "type": "women",
-      "style": "Sweater"
+      "style": "Sweater",
+      "price": 34.95
     }
   ]
 }

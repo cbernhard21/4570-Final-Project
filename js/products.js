@@ -21,6 +21,7 @@ function createProductHTML(arr) {
           <div class="card">
             <h2 class="card-type">${item.type.charAt(0).toUpperCase() + item.type.slice(1)}'s</h2>
             <h3 class="card-style">${item.style.charAt(0).toUpperCase() + item.style.slice(1)}</h3>
+            <p class="card-price">Price: $${item.price}</p>
             <label class="card-label" for="size">Size:</label>
             <select id="size" class="card-options">
             ${item.size.map(size => `<option class="size" value="${size}">${size}</option>`).join('')}
@@ -42,10 +43,19 @@ async function getProducts() {
   return products;
 }
 
+//check to see if the use is logged in
+function checkLoggedIn() {
+  const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+  return isLoggedIn;
+}
+
 //END HELPER FUNCTIONS
 
 //main function to display all the product information
 async function displayProducts() {
+
+
+
   //arrays to be filled later
   let allProducts = [];
   let menShortSleeve = [];
@@ -54,10 +64,16 @@ async function displayProducts() {
   let womenLongSleeve = [];
 
   //is the user logged in
-  const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+  // const isLoggedIn = sessionStorage.getItem('isLoggedIn');
 
-  //cart for products
-  let userCart = [];
+  //if user is logged in, all nav options are revealed
+  if (checkLoggedIn()) {
+    let li = document.querySelectorAll('li');
+    li.forEach(item => {
+      item.classList.contains('hidden');
+      item.classList.remove('hidden');
+    })
+  }
 
   //DOM elements
   const shortContainer = document.querySelector('.short-sleeve-container');
@@ -90,49 +106,38 @@ async function displayProducts() {
     cartButtons.forEach(button => {
       button.addEventListener('click', (e) => {
         e.preventDefault();
-        console.log(userCart)
         let parentDiv = e.target.parentElement;
         let selectedType = parentDiv.children[0].innerText;
         let selectedStyle = parentDiv.children[1].innerText;
-        let selectedSize = parentDiv.children[3].value;
-        let selectedColor = parentDiv.children[5].value;
+        let selectedPrice = parentDiv.children[2].innerText.slice(8);
+        let selectedSize = parentDiv.children[4].value;
+        let selectedColor = parentDiv.children[6].value;
 
         if (!isLoggedIn) {
           alert('Please Log In To Add To Your Cart');
           return
         }
 
-        if (userCart.length > 0) {
-          for(let i = 0; i < userCart.length; i++){
-            if(userCart[i].type === selectedType && userCart[i].style === selectedStyle && userCart[i].size === selectedSize && userCart[i].color === selectedColor){
-              console.log('this item is already in your cart.  you can change the quantity on the cart page');
-              return
-            } 
-            console.log('add new item to cart')
-            userCart.push({
-              type: selectedType,
-              style: selectedStyle,
-              size: selectedSize,
-              color: selectedColor,
-              quantity: 1
-            });
-            console.log('from inside the loop', userCart)
-            return
-            
-            
-          }
+        //create cart variable
+        let userCart;
+
+        //cart for products
+        if(localStorage.getItem('cart')) {
+          userCart = JSON.parse(localStorage.getItem('cart'))
         } else {
-          console.log('first item in your cart')
-          userCart.push({
-            type: selectedType,
-            style: selectedStyle,
-            size: selectedSize,
-            color: selectedColor,
-            quantity: 1
-          });
-        }    
+          userCart = []
+        }
+
+        userCart.push({
+          type: selectedType,
+          style: selectedStyle,
+          size: selectedSize,
+          color: selectedColor,
+          price: selectedPrice,
+          quantity: 1
+        })
         
-        console.log('end of event listener', userCart);
+        localStorage.setItem('cart', JSON.stringify(userCart));
       });
       
     });

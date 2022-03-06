@@ -231,6 +231,10 @@ select {
   font-size: 1.5rem;
 }
 
+.card-price {
+  font-size: 1.1rem;
+}
+
 .card-label {
   display: block;
   float: none;
@@ -245,10 +249,15 @@ select {
 
 .card-type,
 .card-style,
+.card-price,
 .card-options {
-  margin-bottom: 1rem;
+  margin-bottom: .5rem;
 }
 
 .btn {
   padding: .5rem 0;
+}
+
+.hidden {
+  display: none;
 }
