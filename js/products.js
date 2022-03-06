@@ -54,8 +54,6 @@ function checkLoggedIn() {
 //main function to display all the product information
 async function displayProducts() {
 
-
-
   //arrays to be filled later
   let allProducts = [];
   let menShortSleeve = [];
@@ -113,7 +111,7 @@ async function displayProducts() {
         let selectedSize = parentDiv.children[4].value;
         let selectedColor = parentDiv.children[6].value;
 
-        if (!isLoggedIn) {
+        if (!checkLoggedIn()) {
           alert('Please Log In To Add To Your Cart');
           return
         }
