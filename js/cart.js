@@ -23,31 +23,28 @@ if(!checkLoggedIn()){
   //global variable
   const cart = document.querySelector('#cart');
   const userCart = JSON.parse(localStorage.getItem('cart'));
+  let quantity = 1;
 
   console.log(userCart);
 
+
   //create HTML for all the products in the cart
-  const userCartHTML = userCart.map(item => {
+  function createCartHtml(quantity){
+    console.log('quantity inside function', quantity)
+    const userCartHTML = userCart.map((item) => {
       return `
           <div class="cart-item">
             <h2 class="cart-type">${item.type}</h2>
             <p class="cart-style">${item.style}</p>
             <p class="cart-size">${item.size}</p>
             <p class="cart-color">${item.color}</p>
-            <p class="cart-price">${item.price}</p>
-            <p class="cart-quantity"><span class="add" onclick="">add</span> ${item.quantity} <span class="minus">minus</span></p>
+            <p class="cart-price">$${item.quantity * item.price}</p>
+            <p class="cart-quantity"><button class="increase">Add 1 item</button><span class="quantityHTML">${quantity}</span><button>Minus 1 item</button></span></p>
           </div>  
       `
-  }).join('');
-
-
-
-  //handle quantity change
-  function handleQuantityChange() {
-    console.log('i was clicked')
+    }).join('');
+    return userCartHTML;
   }
-
-
 
   //handle the total
   function handleTotal() {
@@ -65,5 +62,17 @@ if(!checkLoggedIn()){
   return totalHTML
   }
 
+  //display product html on page load
+  cart.innerHTML = createCartHtml(quantity) + handleTotal();
 
-  cart.innerHTML = userCartHTML + handleTotal();
+
+
+  const increaseButtons = document.querySelectorAll('.increase');
+  const increaseHTML = document.querySelectorAll('.quantityHTML');
+  console.log(increaseButtons);
+
+  increaseButtons.forEach(button => {
+    button.addEventListener('click', () => {
+     
+    });
+  });
