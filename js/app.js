@@ -1,20 +1,25 @@
-import { register } from "./register.js";
-import { login } from "./login.js";
-import { profile } from './profile.js'
+//check to see if the use is logged in
+function checkLoggedIn() {
+  const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+  return isLoggedIn;
+}
 
-// //get the path to determine which page the user is on 
-const path = window.location.pathname;
 
+//if user is logged in, all nav options are revealed
+if (checkLoggedIn()) {
+  let li = document.querySelectorAll('li');
+  li.forEach(item => {
+    item.classList.contains('hidden');
+    item.classList.remove('hidden');
+  })
+}
 
-// //decide what script to run based on the page the user is currently on
-switch (path) {
-  case '/register.html':
-    register();
-    break;
-  case '/login.html':
-    login();
-    break;
-  case '/profile.html':
-    profile();
-    break;
+//log user out
+if (checkLoggedIn()) {
+  const logoutButton = document.querySelector('#logout')
+  logoutButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    sessionStorage.removeItem('isLoggedIn')
+    window.location.pathname = '/index.html';
+  })
 }

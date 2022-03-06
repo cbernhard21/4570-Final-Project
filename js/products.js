@@ -19,8 +19,7 @@ function createProductHTML(arr) {
   return arr.map(item => {
         return `
           <div class="card">
-            <h2 class="card-type">${item.type.charAt(0).toUpperCase() + item.type.slice(1)}'s</h2>
-            <h3 class="card-style">${item.style.charAt(0).toUpperCase() + item.style.slice(1)}</h3>
+            <h2 class="card-type">${item.type.charAt(0).toUpperCase() + item.type.slice(1)}'s ${item.style.charAt(0).toUpperCase() + item.style.slice(1)}</h2>
             <p class="card-price">Price: $${item.price}</p>
             <label class="card-label" for="size">Size:</label>
             <select id="size" class="card-options">

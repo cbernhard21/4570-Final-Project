@@ -29,9 +29,6 @@ userCart.forEach((item, index) => {
   item.id = index;
 })
 
-
-
-
 //create HTML for all the products in the cart
 function createCartHtml(quantity) {
   console.log(userCart)
@@ -43,7 +40,7 @@ function createCartHtml(quantity) {
             <p class="cart-size">${item.size}</p>
             <p class="cart-color">${item.color}</p>
             <p class="cart-price">$${item.quantity * item.price}</p>
-            <p class="cart-quantity"><button class="increase">Add 1 item</button><span class="quantityHTML">${quantity}</span><button>Minus 1 item</button></span></p>
+            <p class="cart-quantity" data-item-id="${item.id}">Quantity: <span class="quantity">${quantity}</span> <button class="increase">+</button><button class="decrease">-</button></span></p>
             <button class="btn delete">Delete Item</button>
           </div>  
       `
@@ -68,35 +65,41 @@ function handleTotal() {
 }
 
 //display product html on page load
-function displayProductHtml() {
-  cart.innerHTML = createCartHtml(quantity) + handleTotal();
-}
-
-displayProductHtml();
+cart.innerHTML = createCartHtml(quantity) + handleTotal();
 
 //DOM elements after page load
-
 const deleteButtons = document.querySelectorAll('.delete');
 const increaseButtons = document.querySelectorAll('.increase');
 const increaseHTML = document.querySelectorAll('.quantityHTML');
 
+//delete buttons functionality
+//add event listener to each delete button
 deleteButtons.forEach(button => {
   button.addEventListener('click', (e) => {
-    console.log('delete me')
+    //get the ID of the product
     const deletedProduct = e.target.parentElement;
     const deletedProductId = deletedProduct.dataset.itemId;
+    //check the selected product for the product in the cart
     userCart.forEach((item, index) => {
+      //delete product from the array
       if (item.id === Number(deletedProductId)) {
         userCart.splice(index, 1)
       }
     });
-    displayProductHtml()
+    //store cart into local storage
+    localStorage.setItem('cart', JSON.stringify(userCart));
+    //reload the page
+    window.location.reload();
   });
 })
 
 
 increaseButtons.forEach(button => {
-  button.addEventListener('click', () => {
+  button.addEventListener('click', (e) => {
+    console.log('increase quantity')
+    const increaseProduct = e.target.parentElement;
+    const increaseProductId = increaseProduct.dataset.itemId;
+    
 
   });
 });

@@ -3,6 +3,8 @@
  * Author: As-provided
 */
 
+
+
 body {
   /* background style rules for web page body */
   width: 1024px;
@@ -56,6 +58,14 @@ p {
   font-size: 110%;
 }
 
+nav {
+  width: 100%;
+  background-color: #557C3E;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1px;
+}
+
 ul {
   /* page navigation unordered list style rules */
   list-style-type: none;
@@ -85,6 +95,11 @@ li a:hover {
   /* navigation hover style rules */
   background-color: #CFE8CC;
   color: #557C3E;
+}
+
+.right {
+  padding: 0;
+  margin: 0;
 }
 
 footer {
@@ -224,15 +239,11 @@ select {
 
 .card-type {
   text-align: left;
-  font-size: 1.8rem;
-}
-
-.card-style {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .card-price {
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .card-label {

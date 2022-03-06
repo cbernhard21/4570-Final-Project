@@ -33,7 +33,6 @@ function profile() {
 
     //get values from the form
     const newScreenName = document.querySelector('#screenName').value;
-    console.log(newScreenName)
     const backgroundColor = document.querySelector('#backgroundColor').value;
     const buttonColor = document.querySelector('#buttonColors').value;
 
@@ -45,8 +44,6 @@ function profile() {
 
     //set color settings as a key/value in the user object
     loggedInUserInfo.settings = colorSettings;
-
-    console.log(loggedInUserInfo)
 
     //sets new background color and button color
     let newBackgroundColor = colorSettings.backgroundColor;
