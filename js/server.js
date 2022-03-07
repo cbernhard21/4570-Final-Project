@@ -71,6 +71,12 @@ const server = http.createServer((req, res) => {
       //end image files
 
       //javascript files
+
+    case '/js/app.js':
+      res.writeHead(200, {'Content-Type': 'text/javascript'});
+      fs.createReadStream(__dirname + '/app.js').pipe(res);
+      break;
+
     case '/js/register.js':
       res.writeHead(200, { 'Content-Type': 'text/javascript' });
       fs.createReadStream(__dirname + '/register.js').pipe(res);

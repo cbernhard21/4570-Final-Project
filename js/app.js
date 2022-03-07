@@ -1,3 +1,5 @@
+'use strict'
+
 //check to see if the use is logged in
 function checkLoggedIn() {
   const isLoggedIn = sessionStorage.getItem('isLoggedIn');

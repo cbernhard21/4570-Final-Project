@@ -20,7 +20,6 @@ if (checkLoggedIn()) {
 //global variable
 const cart = document.querySelector('#cart');
 const userCart = JSON.parse(localStorage.getItem('cart'));
-let quantity = 1;
 
 console.log(userCart);
 
@@ -30,17 +29,17 @@ userCart.forEach((item, index) => {
 })
 
 //create HTML for all the products in the cart
-function createCartHtml(quantity) {
+function createCartHtml() {
   console.log(userCart)
   const userCartHTML = userCart.map((item) => {
     return `
           <div class="cart-item" data-item-id="${item.id}">
             <h2 class="cart-type">${item.type}</h2>
             <p class="cart-style">${item.style}</p>
-            <p class="cart-size">${item.size}</p>
-            <p class="cart-color">${item.color}</p>
-            <p class="cart-price">$${item.quantity * item.price}</p>
-            <p class="cart-quantity" data-item-id="${item.id}">Quantity: <span class="quantity">${quantity}</span> <button class="increase">+</button><button class="decrease">-</button></span></p>
+            <p class="cart-size">Size: ${item.size}</p>
+            <p class="cart-color">Color: ${item.color}</p>
+            <p class="cart-price">Price: ${item.quantity} x $${item.price} = $${item.quantity * item.price}</p>
+            <p class="cart-quantity" data-item-id="${item.id}">Quantity: <span class="quantity">${item.quantity}</span> <button class="increase">+</button><button class="decrease">-</button></span></p>
             <button class="btn delete">Delete Item</button>
           </div>  
       `
@@ -65,12 +64,12 @@ function handleTotal() {
 }
 
 //display product html on page load
-cart.innerHTML = createCartHtml(quantity) + handleTotal();
+cart.innerHTML = createCartHtml() + handleTotal();
 
 //DOM elements after page load
 const deleteButtons = document.querySelectorAll('.delete');
 const increaseButtons = document.querySelectorAll('.increase');
-const increaseHTML = document.querySelectorAll('.quantityHTML');
+const decreaseButtons = document.querySelectorAll('.decrease');
 
 //delete buttons functionality
 //add event listener to each delete button
@@ -99,7 +98,13 @@ increaseButtons.forEach(button => {
     console.log('increase quantity')
     const increaseProduct = e.target.parentElement;
     const increaseProductId = increaseProduct.dataset.itemId;
-    
+  });
+});
 
+decreaseButtons.forEach(button => {
+  button.addEventListener('click', (e) => {
+    console.log('decrease quantity')
+    const decreaseProduct = e.target.parentElement;
+    const decreaseProductId = decreaseProduct.dataset.itemId;
   });
 });
