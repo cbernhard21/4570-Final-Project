@@ -12,12 +12,12 @@ function profile() {
   //global variables
   const formContainer = document.querySelector('#formBox');
   const button = document.querySelector('.submit');
-  const welomeMessageContainer = document.querySelector('.welcome-message');
+  const welcomeMessageContainer = document.querySelector('.welcome-message');
   const screenName = loggedInUserInfo.screenName;
   const welcomeMessageText = `Welcome ${screenName}!`;
 
   //display welcome message with stored screen name
-  displayWelcomeMessage(welomeMessageContainer, welcomeMessageText);
+  displayWelcomeMessage(welcomeMessageContainer, welcomeMessageText);
 
   //check if logged in user has color preference, if so change colors if not leave at default
   if (loggedInUserInfo.settings) {
@@ -56,7 +56,7 @@ function profile() {
       loggedInUserInfo.screenName = newScreenName;
       //display new message if screen name was changed
       const newWelcomeMessageText = `Welcome ${newScreenName}!`;
-      displayWelcomeMessage(welomeMessageContainer, newWelcomeMessageText);
+      displayWelcomeMessage(welcomeMessageContainer, newWelcomeMessageText);
     }
     //set user to local storage
     localStorage.setItem('user', JSON.stringify(loggedInUserInfo));
@@ -68,6 +68,9 @@ function profile() {
 //the color hex numbers are coded in the switch statement
 function handleBackgroundColor(color, htmlElement) {
   switch (color) {
+    case 'default':
+      htmlElement.style.backgroundColor = '#557C3E';
+      break;
     case 'green':
       htmlElement.style.backgroundColor = '#557C3E';
       break;
@@ -87,6 +90,9 @@ function handleBackgroundColor(color, htmlElement) {
 //the color hex numbers are coded in the switch statement
 function handleButtonColor(color, htmlElement) {
   switch (color) {
+    case 'default':
+      htmlElement.style.backgroundColor = '#FAEBD7';
+      break;
     case 'white':
       htmlElement.style.backgroundColor = '#FAEBD7';
       break;

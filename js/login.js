@@ -3,8 +3,7 @@ function login() {
   const formContainer = document.querySelector('#formBox');
   const loginButton = document.querySelector('.submit');
   let errorMessageText = 'Incorrect username or password.  Please try again.'
-  let loginAttemps = 0;
-
+  let loginAttempts = 0;
 
   if (sessionStorage.getItem('isLoggedIn')) {
     window.location.pathname = '/profile.html'
@@ -14,9 +13,9 @@ function login() {
   loginButton.addEventListener('click', (e) => {
     e.preventDefault();
 
-    //after 3 attemps the error message will change
-    loginAttemps++;
-    if (loginAttemps >= 3) {
+    //after 3 attempts the error message will change
+    loginAttempts++;
+    if (loginAttempts >= 3) {
       errorMessageText = 'Please make sure you are registered'
     }
 
@@ -58,7 +57,6 @@ function login() {
   });
 
 };
-
 
 //function to add error message to DOM, takes in a HTML container to insert the text and a message
 const addErrorMessage = (htmlContainer, message) => {

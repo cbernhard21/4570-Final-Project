@@ -3,8 +3,6 @@
  * Author: As-provided
 */
 
-
-
 body {
   /* background style rules for web page body */
   width: 1024px;
@@ -189,12 +187,23 @@ select {
 }
 
 
+/* styles added by Chris Bernhard */
+
+
 /* styles for error message */
 
-.btn {
-  padding: .5rem 0;
+button {
+  border: none;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
+.btn {
+  padding: .5rem;
+  border: none;
+}
 
 .error {
   color: #F4EDDF;
@@ -222,14 +231,24 @@ select {
   padding: 0;
   margin: 0;
   font-family: sans-serif;
-  color: #333;
 }
 
 .container {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 1rem;
   padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.container .btn {
+  padding: .5rem;
+  width: 100%;
+}
+
+.container select {
+  width: 100%;
 }
 
 .card {
@@ -239,16 +258,22 @@ select {
   box-shadow: 10px 10px 5px -2px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  flex: 0 0 33.33%;
 }
 
 .card-type {
   text-align: left;
   font-size: 1.3rem;
+  color: #ddd;
+}
+
+.card-style {
+  color: #ddd;
 }
 
 .card-price {
   font-size: 1rem;
+  color: #ddd;
 }
 
 .card-label {
@@ -270,18 +295,36 @@ select {
   margin-bottom: .5rem;
 }
 
+.flex {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+}
+
+.btn-go-to-cart {
+  width: 60%;
+  padding: .75rem 0;
+  font-size: 1.2rem;
+}
+
+
 /* styles for cart page */
+
 .cart-container * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   color: #333;
 }
+
 .cart-container {
   width: 90%;
   margin: 0 auto;
   padding: 1rem;
 }
+
 .cart-item {
   background-color: rgba(255, 255, 255, .5);
   border-radius: 10px;
@@ -289,8 +332,18 @@ select {
   margin-bottom: 1rem;
   box-shadow: 10px 10px 5px -2px rgba(0, 0, 0, 0.1);
 }
+
+.cart-type,
+.cart-style,
+.cart-size,
+.cart-color,
+.cart-price,
+.cart-quantity,
+.quantity {
+  color: #ddd;
+}
+
 .cart-type {
-  color: #333;
   font-family: sans-serif;
   text-align: left;
 }
@@ -302,6 +355,8 @@ select {
 .increase,
 .decrease {
   padding: .25rem .5rem;
+  border-radius: 5px;
+  color: #eee;
 }
 
 .increase {
@@ -312,8 +367,31 @@ select {
   padding: .5rem 1.25rem;
 }
 
+.total-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #ddd;
+}
 
+.total-text {
+  font-weight: 700;
+  font-size: 2rem;
+  color: #ddd;
+}
+
+.total-amount {
+  font-size: 2rem;
+  color: #ddd;
+}
 
 .hidden {
   display: none;
+}
+
+.button-container {
+  width: 65%;
+  margin: 0 auto;
+  border-radius: 10px;
+  padding: .5rem 0;
 }

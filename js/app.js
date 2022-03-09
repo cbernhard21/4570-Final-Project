@@ -6,7 +6,6 @@ function checkLoggedIn() {
   return isLoggedIn;
 }
 
-
 //if user is logged in, all nav options are revealed
 if (checkLoggedIn()) {
   let li = document.querySelectorAll('li');
@@ -14,7 +13,7 @@ if (checkLoggedIn()) {
     item.classList.contains('hidden');
     item.classList.remove('hidden');
   })
-}
+};
 
 //log user out
 if (checkLoggedIn()) {
@@ -24,4 +23,4 @@ if (checkLoggedIn()) {
     sessionStorage.removeItem('isLoggedIn')
     window.location.pathname = '/index.html';
   })
-}
+};

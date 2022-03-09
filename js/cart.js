@@ -1,3 +1,45 @@
+'use strict'
+
+//BEGIN HELPER FUNCTIONS
+
+//function to handle form background color, takes in a color string and the DOM element the color is applied to
+//the color hex numbers are coded in the switch statement
+function handleBackgroundColor(color, htmlElement) {
+  switch (color) {
+    case 'green':
+      htmlElement.style.backgroundColor = '#557C3E';
+      break;
+    case 'black':
+      htmlElement.style.backgroundColor = '#333333';
+      break;
+    case 'blue':
+      htmlElement.style.backgroundColor = '#0a013f';
+      break;
+    case 'brown':
+      htmlElement.style.backgroundColor = '#3f3001';
+      break;
+  }
+}
+
+//function to handle button color change, takes in a color string and the DOM element the color is applied to
+//the color hex numbers are coded in the switch statement
+function handleButtonColor(color, htmlElement) {
+  switch (color) {
+    case 'white':
+      htmlElement.style.backgroundColor = '#FAEBD7';
+      break;
+    case 'grey':
+      htmlElement.style.backgroundColor = '#dddddd';
+      break;
+    case 'babyBlue':
+      htmlElement.style.backgroundColor = '#8ba8f8';
+      break;
+    case 'lightBrown':
+      htmlElement.style.backgroundColor = '#a88d53';
+      break;
+  }
+}
+
 //check to see if the use is logged in
 function checkLoggedIn() {
   const isLoggedIn = sessionStorage.getItem('isLoggedIn');
@@ -17,11 +59,19 @@ if (checkLoggedIn()) {
   })
 }
 
+//money formatter
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 2
+});
+
+//END HELPER FUNCTIONS
+
 //global variable
 const cart = document.querySelector('#cart');
 const userCart = JSON.parse(localStorage.getItem('cart'));
-
-console.log(userCart);
+const main = document.querySelector('main');
 
 //add ID to each item of the cart using the index for the ID
 userCart.forEach((item, index) => {
@@ -30,7 +80,6 @@ userCart.forEach((item, index) => {
 
 //create HTML for all the products in the cart
 function createCartHtml() {
-  console.log(userCart)
   const userCartHTML = userCart.map((item) => {
     return `
           <div class="cart-item" data-item-id="${item.id}">
@@ -38,7 +87,7 @@ function createCartHtml() {
             <p class="cart-style">${item.style}</p>
             <p class="cart-size">Size: ${item.size}</p>
             <p class="cart-color">Color: ${item.color}</p>
-            <p class="cart-price">Price: ${item.quantity} x $${item.price} = $${item.quantity * item.price}</p>
+            <p class="cart-price">Price: ${item.quantity} x $${item.price} = ${formatter.format(item.quantity * item.price)}</p>
             <p class="cart-quantity" data-item-id="${item.id}">Quantity: <span class="quantity">${item.quantity}</span> <button class="increase">+</button><button class="decrease">-</button></span></p>
             <button class="btn delete">Delete Item</button>
           </div>  
@@ -47,23 +96,25 @@ function createCartHtml() {
   return userCartHTML;
 }
 
-//handle the total
+//calculate and create HTML in this function
 function handleTotal() {
   let total = 0;
+
+  //loop through array, add on to the total price
   userCart.forEach(item => {
-    let price = Number(item.price);
+    let price = Number(item.price * item.quantity);
     total += price;
   })
-  console.log(total)
+
   const totalHTML = `
-        <div>
-            <p>Total $${total}</p>
+        <div class="cart-item total-container">
+            <span class="total-text">Order Total</span> <span class="total-amount">${formatter.format(total)}</span>
         </div>
   `;
   return totalHTML
 }
 
-//display product html on page load
+//display product html and total HTML on page load
 cart.innerHTML = createCartHtml() + handleTotal();
 
 //DOM elements after page load
@@ -92,19 +143,89 @@ deleteButtons.forEach(button => {
   });
 })
 
-
+//handle the increase product quantity
 increaseButtons.forEach(button => {
   button.addEventListener('click', (e) => {
     console.log('increase quantity')
     const increaseProduct = e.target.parentElement;
     const increaseProductId = increaseProduct.dataset.itemId;
+    userCart.forEach((item) => {
+      if (item.id === Number(increaseProductId)) {
+        item.quantity++;
+      };
+    });
+    //store cart into local storage
+    localStorage.setItem('cart', JSON.stringify(userCart));
+    //reload the page
+    window.location.reload();
   });
 });
 
+//handle the decrease product quantity 
 decreaseButtons.forEach(button => {
   button.addEventListener('click', (e) => {
     console.log('decrease quantity')
     const decreaseProduct = e.target.parentElement;
     const decreaseProductId = decreaseProduct.dataset.itemId;
+    userCart.forEach(item => {
+      if (item.id === Number(decreaseProductId)) {
+        if (item.quantity > 0) {
+          item.quantity--
+        }
+      };
+    });
+    //store cart into local storage
+    localStorage.setItem('cart', JSON.stringify(userCart));
+    //reload the page
+    window.location.reload();
   });
 });
+
+//create go to checkout button at the bottom of the page
+const checkButton = document.createElement('button');
+const buttonDiv = document.createElement('div');
+buttonDiv.setAttribute('class', 'flex center button-container');
+checkButton.innerText = 'Check Out';
+checkButton.setAttribute('class', 'btn-go-to-cart');
+buttonDiv.appendChild(checkButton);
+main.append(buttonDiv);
+
+//event listener for go to checkout
+const goToCheckOutButton = document.querySelector('.btn-go-to-cart');
+goToCheckOutButton.addEventListener('click', () => {
+  window.location.pathname = './checkout.html';
+});
+
+
+
+//change colors according to user settings
+//DOM elements to change background color
+const cartItemDiv = document.querySelectorAll('.cart-item');
+const deleteButton = document.querySelectorAll('.delete');
+const allIncreaseButtons = document.querySelectorAll('.increase');
+const allDecreaseButtons = document.querySelectorAll('.decrease');
+const checkoutButton = document.querySelector('.btn-go-to-cart');
+const checkOutButtonDiv = document.querySelector('.button-container');
+
+
+//get user color settings from local storage
+const loggedInUserInfo = JSON.parse(localStorage.getItem('user'));
+const userBackgroundColor = loggedInUserInfo.settings.backgroundColor;
+const userButtonColor = loggedInUserInfo.settings.buttonColor;
+
+//change background colors
+cartItemDiv.forEach(div => {
+  handleBackgroundColor(userBackgroundColor, div);
+});
+deleteButton.forEach(button => {
+  handleButtonColor(userButtonColor, button);
+});
+allIncreaseButtons.forEach(button => {
+  handleButtonColor(userButtonColor, button);
+});
+allDecreaseButtons.forEach(button => {
+  handleButtonColor(userButtonColor, button);
+});
+
+handleButtonColor(userButtonColor, checkoutButton);
+handleBackgroundColor(userBackgroundColor, checkOutButtonDiv);

@@ -1,7 +1,50 @@
 'use strict'
 
-
 //BEGIN HELPER FUNCTIONS 
+
+//function to handle form background color, takes in a color string and the DOM element the color is applied to
+//the color hex numbers are coded in the switch statement
+function handleBackgroundColor(color, htmlElement) {
+  switch (color) {
+    case 'default':
+      htmlElement.style.backgroundColor = '#557C3E';
+      break;
+    case 'green':
+      htmlElement.style.backgroundColor = '#557C3E';
+      break;
+    case 'black':
+      htmlElement.style.backgroundColor = '#333333';
+      break;
+    case 'blue':
+      htmlElement.style.backgroundColor = '#0a013f';
+      break;
+    case 'brown':
+      htmlElement.style.backgroundColor = '#3f3001';
+      break;
+  }
+}
+
+//function to handle button color change, takes in a color string and the DOM element the color is applied to
+//the color hex numbers are coded in the switch statement
+function handleButtonColor(color, htmlElement) {
+  switch (color) {
+    case 'default':
+      htmlElement.style.backgroundColor = '#FAEBD7';
+      break;
+    case 'white':
+      htmlElement.style.backgroundColor = '#FAEBD7';
+      break;
+    case 'grey':
+      htmlElement.style.backgroundColor = '#dddddd';
+      break;
+    case 'babyBlue':
+      htmlElement.style.backgroundColor = '#8ba8f8';
+      break;
+    case 'lightBrown':
+      htmlElement.style.backgroundColor = '#a88d53';
+      break;
+  }
+}
 
 //function to create 2 arrays, one for short sleeve and on for long sleeve
 function sortProducts(productArr, value, productArr1, productArr2) {
@@ -30,7 +73,7 @@ function createProductHTML(arr) {
             <select id="color" class="card-options">
             ${item.colors.map(color => `<option class="color" value="${color}">${color}</option>`).join('')}
             </select>
-            <input type="submit" class="btn" id="addToCart" value="Add To Cart">
+            <button type="submit" class="btn add-to-cart">Add To Cart</button>
           </div>
           `
   }).join('\n')
@@ -49,6 +92,31 @@ function checkLoggedIn() {
   return isLoggedIn;
 }
 
+//handles the user's color settings runs at the end of displayProducts
+function changeColors() {
+  //change colors according to user settings
+  //DOM elements to change background color
+  const cardDiv = document.querySelectorAll('.card');
+  const addToCartButton = document.querySelectorAll('.add-to-cart');
+  const goToCartButton = document.querySelector('.btn-go-to-cart');
+  const buttonDiv = document.querySelector('.button-container');
+
+  //get user color settings from local storage
+  const loggedInUserInfo = JSON.parse(localStorage.getItem('user'));
+  const userBackgroundColor = loggedInUserInfo.settings.backgroundColor;
+  const userButtonColor = loggedInUserInfo.settings.buttonColor;
+  
+  //change background colors
+  cardDiv.forEach(div => {
+    handleBackgroundColor(userBackgroundColor, div);
+  });
+  addToCartButton.forEach(button => {
+    handleButtonColor(userButtonColor, button);
+  });
+  handleButtonColor(userButtonColor, goToCartButton);
+  handleBackgroundColor(userBackgroundColor, buttonDiv);
+}
+
 //END HELPER FUNCTIONS
 
 //main function to display all the product information
@@ -56,13 +124,6 @@ async function displayProducts() {
 
   //arrays to be filled later
   let allProducts = [];
-  let menShortSleeve = [];
-  let menLongSleeve = [];
-  let womenShortSleeve = [];
-  let womenLongSleeve = [];
-
-  //is the user logged in
-  // const isLoggedIn = sessionStorage.getItem('isLoggedIn');
 
   //if user is logged in, all nav options are revealed
   if (checkLoggedIn()) {
@@ -76,28 +137,48 @@ async function displayProducts() {
   //DOM elements
   const shortContainer = document.querySelector('.short-sleeve-container');
   const longContainer = document.querySelector('.long-sleeve-container');
+  const main = document.querySelector('main');
+
+  //short and long sleeve arrays
+  const allShortSleeveShirts = [];
+  const allLongSleeveShirts = [];
 
   try {
     allProducts = await getProducts();
-    let menShirts = allProducts.Men;
-    let womenShirts = allProducts.Women;
+    const menShirts = allProducts.Men;
+    const womenShirts = allProducts.Women;
 
-    //create arrays for men and woman short/long sleeve shirts
-    sortProducts(menShirts, 'short', menShortSleeve, menLongSleeve);
-    sortProducts(womenShirts, 'short', womenShortSleeve, womenLongSleeve);
+    //sort men's short and long sleeve
+    menShirts.forEach(shirt => {
+      if(shirt.sleeve === 'short') {
+        allShortSleeveShirts.push(shirt)
+      } else if(shirt.sleeve === 'long') {
+        allLongSleeveShirts.push(shirt)
+      }
+    });
+    //sort women's short and long sleeve
+    womenShirts.forEach(shirt => {
+      if(shirt.sleeve === 'short') {
+        allShortSleeveShirts.push(shirt)
+      } else if(shirt.sleeve === 'long') {
+        allLongSleeveShirts.push(shirt)
+      }
+    });
 
-    const menShortSleeveHTML = createProductHTML(menShortSleeve);
-    const womenShortSleeveHTML = createProductHTML(womenShortSleeve)
-    const menLongSleeveHTML = createProductHTML(menLongSleeve);
-    const womenLongSleeveHTML = createProductHTML(womenLongSleeve);
+    //create and render all HTML for the products to the web page
+    const allShortSleeveHTML = createProductHTML(allShortSleeveShirts); 
+    const allLongSleeveHTML = createProductHTML(allLongSleeveShirts);
+    shortContainer.innerHTML = `<div class="container">${allShortSleeveHTML}</div>`;
+    longContainer.innerHTML = `<div class="container">${allLongSleeveHTML}</div>`;
 
-
-    shortContainer.innerHTML = `<div class="container">${menShortSleeveHTML}</div>
-                                <div class="container">${womenShortSleeveHTML}</div>`;
-
-    longContainer.innerHTML = `<div class="container">${menLongSleeveHTML}</div>
-                               <div class="container">${womenLongSleeveHTML}</div>
-                              `;
+    //create go to cart button at the bottom of the page
+    const cartButton = document.createElement('button');
+    const buttonDiv = document.createElement('div');
+    buttonDiv.setAttribute('class', 'flex center button-container');
+    cartButton.innerText = 'Go To Cart';
+    cartButton.setAttribute('class', 'btn-go-to-cart');
+    buttonDiv.appendChild(cartButton)
+    main.append(buttonDiv);
 
     //event listener for add to cart button
     const cartButtons = document.querySelectorAll('.btn');
@@ -137,10 +218,14 @@ async function displayProducts() {
         
         localStorage.setItem('cart', JSON.stringify(userCart));
       });
-      
-    });
+      //event listener for go to cart
+      const goToCartButton = document.querySelector('.btn-go-to-cart');
+      goToCartButton.addEventListener('click', () => {
+        window.location.pathname = './cart.html';
+      });
+    }); 
 
-    
+    changeColors()
     
   } catch (e) {
       console.log('There was an error');

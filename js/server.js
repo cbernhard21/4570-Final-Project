@@ -73,7 +73,7 @@ const server = http.createServer((req, res) => {
       //javascript files
 
     case '/js/app.js':
-      res.writeHead(200, {'Content-Type': 'text/javascript'});
+      res.writeHead(200, { 'Content-Type': 'text/javascript' });
       fs.createReadStream(__dirname + '/app.js').pipe(res);
       break;
 
@@ -100,6 +100,15 @@ const server = http.createServer((req, res) => {
     case '/js/cart.js':
       res.writeHead(200, { 'Content-Type': 'text/javascript' });
       fs.createReadStream(__dirname + '/cart.js').pipe(res);
+      break;
+
+    case '/js/checkout.js':
+      res.writeHead(200, { 'Content-Type': 'text/javascript' });
+      fs.createReadStream(__dirname + '/checkout.js').pipe(res);
+      break;
+    case '/js/thanks.js':
+      res.writeHead(200, { 'Content-Type': 'text/javascript' });
+      fs.createReadStream(__dirname + '/thanks.js').pipe(res);
       break;
       //end JS files
 
