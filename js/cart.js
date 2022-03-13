@@ -147,7 +147,6 @@ function cart() {
   //handle the increase product quantity
   increaseButtons.forEach(button => {
     button.addEventListener('click', (e) => {
-      console.log('increase quantity')
       const increaseProduct = e.target.parentElement;
       const increaseProductId = increaseProduct.dataset.itemId;
       userCart.forEach((item) => {
@@ -165,7 +164,6 @@ function cart() {
   //handle the decrease product quantity 
   decreaseButtons.forEach(button => {
     button.addEventListener('click', (e) => {
-      console.log('decrease quantity')
       const decreaseProduct = e.target.parentElement;
       const decreaseProductId = decreaseProduct.dataset.itemId;
       userCart.forEach(item => {

@@ -7,7 +7,6 @@ function profile() {
 
   //get local storage information
   const loggedInUserInfo = JSON.parse(localStorage.getItem('user'));
-  console.log(loggedInUserInfo);
 
   //global variables
   const formContainer = document.querySelector('#formBox');

@@ -91,14 +91,10 @@ function checkCode(input) {
 //function that checks the input fields in the form are entered correctly, if not a message in the DOM is displayed
 function checkCorrectFormData(value, htmlContainer, messageArr, func) {
   if (value != '') {
-    if (func(value)) {
-      // console.log('you entered your name correctly')
-    } else {
-      // console.log('please reenter your name with only letters')
+    if (func(value)) {} else {
       addErrorMessage(htmlContainer, messageArr[0]);
     }
   } else {
-    // console.log('Please enter your first name');
     addErrorMessage(htmlContainer, messageArr[1]);
   };
 };

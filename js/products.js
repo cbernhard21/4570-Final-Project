@@ -135,8 +135,6 @@ function defaultColors() {
     handleBackgroundColor('default', buttonDiv);
 }
 
-
-
 //END HELPER FUNCTIONS
 
 //main function to display all the product information
@@ -243,7 +241,6 @@ async function displayProducts() {
       const addToCartButtonForPopUp = document.querySelectorAll('.add-to-cart');
       addToCartButtonForPopUp.forEach(button => {
         button.addEventListener('click', (e) => {
-          console.log('added to cart')
           e.target.classList.add('add-to-cart-popup');
           setTimeout(() => {
             e.target.classList.remove('add-to-cart-popup');
