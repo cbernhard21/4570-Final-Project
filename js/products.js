@@ -117,6 +117,26 @@ function changeColors() {
   handleBackgroundColor(userBackgroundColor, buttonDiv);
 }
 
+function defaultColors() {
+  //DOM elements to change background color
+  const cardDiv = document.querySelectorAll('.card');
+  const addToCartButton = document.querySelectorAll('.add-to-cart');
+  const goToCartButton = document.querySelector('.btn-go-to-cart');
+  const buttonDiv = document.querySelector('.button-container');
+
+    //change background colors
+    cardDiv.forEach(div => {
+      handleBackgroundColor('default', div);
+    });
+    addToCartButton.forEach(button => {
+      handleButtonColor('default', button);
+    });
+    handleButtonColor('default', goToCartButton);
+    handleBackgroundColor('default', buttonDiv);
+}
+
+
+
 //END HELPER FUNCTIONS
 
 //main function to display all the product information
@@ -218,6 +238,21 @@ async function displayProducts() {
         
         localStorage.setItem('cart', JSON.stringify(userCart));
       });
+
+      //create popup when added to the cart
+      const addToCartButtonForPopUp = document.querySelectorAll('.add-to-cart');
+      addToCartButtonForPopUp.forEach(button => {
+        button.addEventListener('click', (e) => {
+          console.log('added to cart')
+          e.target.classList.add('add-to-cart-popup');
+          setTimeout(() => {
+            e.target.classList.remove('add-to-cart-popup');
+            // window.location.reload();
+          }, 1000)
+        });
+      });
+
+
       //event listener for go to cart
       const goToCartButton = document.querySelector('.btn-go-to-cart');
       goToCartButton.addEventListener('click', () => {
@@ -225,7 +260,12 @@ async function displayProducts() {
       });
     }); 
 
-    changeColors()
+    if (!checkLoggedIn()) {
+      defaultColors()
+    } else {
+      changeColors()
+    }
+    
     
   } catch (e) {
       console.log('There was an error');

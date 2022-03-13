@@ -199,10 +199,8 @@ submitButton.addEventListener('click', (e) => {
   });
   //if there are no errors, go to the thank you page
   const allElementsAtEnd = document.querySelectorAll('.error');
-  console.log(allElementsAtEnd.length);
 
   if (allElementsAtEnd.length === 0) {
-    console.log('go to thank you page');
     window.location.pathname = '/thanks.html'
   } else {
     console.log('there are still errors');
